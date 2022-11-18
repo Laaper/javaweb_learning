@@ -15,6 +15,6 @@ import java.io.IOException;
 public class Demoservlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("demoservlet");
+        System.out.println("demoservlets");
     }
 }
