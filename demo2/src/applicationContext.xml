@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans>
+    <bean id="fruitdao" class="dao.impl.FruitDAOImpl"></bean>
+    <bean id="fruit" class="controller.FruitController">
+        <!-- ref对应上面的bean id，表示引用，而name表示属性名-->
+        <property name="fruitdao" ref="fruitdao"></property>
+    </bean>
+
+</beans>

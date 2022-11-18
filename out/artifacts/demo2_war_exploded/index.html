@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       th, td{
+            border:2px solid red;
+           text-align: center;
+        }
+    </style>
+    <script lang="JavaScript">
+        function del(fid){
+            if (confirm("确定要删除么")) {
+                window.location.href='/fruit.do?fid='+fid+'&operate=del';
+            }
+        }
+    </script>
+</head>
+<body>
+<table style="border-collapse: collapse;width: 50%;height: 40%">
+    <tr>
+        <th>名称</th>
+        <th>单价</th>
+        <th>库存</th>
+        <th>备注</th>
+
+    </tr>
+    <tr th:if="${#lists.isEmpty(session.fruitlist)}">
+        <td colspan="4">库存清空</td>
+    </tr>
+    <tr th:unless="${#lists.isEmpty(session.fruitlist)}" th:each="fruit:${session.fruitlist}">
+        <td ><a th:href="'/fruit.do?fid='+${fruit.fid}+'&operate=edit'" th:text="${fruit.fname}" style="text-decoration: none"></a></td>
+        <td th:text="${fruit.price}"></td>
+        <td th:text="${fruit.fcount}"></td>
+        <td ><button th:text="${fruit.remark}" th:onclick="'del('+${fruit.fid}+')'"></button></td>
+    </tr>
+
+
+</table>
+<button ><a href="add.html" style="text-decoration: none">添加数据</a></button>
+<div>
+    <a href="/fruit.do?pid=0&operate=page"><input type="button" value="首页" th:disabled="${session.page==0}"></a>
+    <a th:href="'/fruit.do?pid='+${session.page-1}+'&operate=page'"><input type="button" value="上一页" th:disabled="${session.page==0}"></a>
+    <a th:href="'/fruit.do?pid='+${session.page+1}+'&operate=page'"><input type="button" value="下一页" th:disabled="${session.page==session.lastpage}"></a>
+    <a th:href="'/fruit.do?pid='+${session.lastpage}+'&operate=page'"><input type="button" value="尾页" th:disabled="${session.page==session.lastpage}"></a>
+
+</div>
+
+</body>
+</html>
